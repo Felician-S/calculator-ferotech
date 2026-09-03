@@ -1,0 +1,2007 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+}
+body
+{
+    text-align: center;
+}
+.wrapper
+{
+    border: 0px solid black;
+    width: 1000px;
+    margin: 20px auto;
+    text-align: left;
+    height: auto;
+    font: 14px Tahoma;
+    padding: 0px;
+}
+
+/* Interfață modernă pentru modulele calculatorului */
+.categorie-produse-antet {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 18px;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 20px 8px 10px;
+    padding: 22px;
+    border: 1px solid #b9cee2;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #f7fbff 0%, #edf5fc 100%);
+    box-shadow: 0 8px 24px rgba(20, 66, 102, .06);
+}
+
+.categorie-produse-text h2,
+.total-modern h2,
+.contact-modern h2 {
+    margin: 3px 0 5px;
+    color: #073f6d;
+    font-size: 24px;
+    line-height: 1.15;
+}
+
+.categorie-produse-text p,
+.total-modern-antet p,
+.contact-modern-antet p {
+    margin: 0;
+    color: #415b70;
+    line-height: 1.45;
+}
+
+.contor-produse {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #fff;
+    color: #073f6d;
+    box-shadow: 0 3px 12px rgba(20, 66, 102, .05);
+}
+
+.contor-produse span {
+    display: inline-grid;
+    place-items: center;
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 50%;
+    background: #0b73b9;
+    color: #fff;
+    font-weight: 800;
+}
+
+.categorie-produse-antet > .un-buton,
+.total-modern-antet > .un-buton,
+.buton-oferta-modern {
+    min-height: 42px;
+    padding: 9px 16px;
+    border: 1px solid #096ba9;
+    border-radius: 8px;
+    background: #0b73b9;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.categorie-produse-antet > .un-buton:hover,
+.total-modern-antet > .un-buton:hover,
+.buton-oferta-modern:hover {
+    background: #075d98;
+}
+
+#rulouri,
+#plase,
+#aditionale {
+    margin: 0 8px;
+}
+
+.rulou,
+.plase,
+.aditional {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 0;
+    margin: 10px 0 18px;
+    padding: 18px;
+    border: 1px solid #d1dee9;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 22px rgba(20, 66, 102, .08);
+}
+
+.rulou_content,
+.plase_content,
+.aditional_content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 12px;
+    height: auto;
+    min-height: 0;
+}
+
+.rulou_content .camp_lh,
+.rulou_content .camp_tip,
+.rulou_content .camp_tip2,
+.plase_content .camp_lh,
+.plase_content .camp_plase,
+.plase_content .camp_optiune,
+.aditional_content .camp_produse,
+.aditional_content .camp_optiune {
+    box-sizing: border-box;
+    float: none;
+    width: auto;
+    height: auto;
+    min-width: 90px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f4f8fb;
+    color: #244a66;
+}
+
+.rulou_content .camp_tip {
+    min-width: 125px;
+}
+
+.rulou_content .camp_tip2 {
+    min-width: 82px;
+}
+
+.plase_content .camp_plase,
+.aditional_content .camp_produse {
+    min-width: 330px;
+    flex: 1 1 330px;
+}
+
+.plase_content .camp_optiune,
+.aditional_content .camp_optiune {
+    min-width: 120px;
+}
+
+.rulou .line2,
+.rulou .line3,
+.plase .line2,
+.plase .line3,
+.aditional .line2,
+.aditional .line3 {
+    height: auto;
+    min-height: 24px;
+    line-height: 1.35;
+}
+
+.rulou input[type="text"],
+.plase input[type="text"],
+.aditional input[type="text"],
+.rulou select,
+.plase select,
+.aditional select {
+    box-sizing: border-box;
+    min-height: 34px;
+    padding: 6px 8px;
+    border: 1px solid #aebfcd;
+    border-radius: 6px;
+    background: #fff;
+    color: #142f44;
+}
+
+.selector-culoare-detaliata select {
+    width: 100%;
+    min-width: 150px;
+}
+
+.categorie-culoare-pret[hidden] {
+    display: none !important;
+}
+
+.rulou .camp_lh input,
+.plase .camp_lh input {
+    width: 78px;
+}
+
+.rulou .cantitate input,
+.plase .cantitate input,
+.aditional .cantitate input {
+    width: 58px;
+}
+
+.rulou .un-buton,
+.plase .un-buton,
+.aditional .un-buton {
+    min-height: 34px;
+    padding: 7px 12px;
+    border: 1px solid #0b73b9;
+    border-radius: 7px;
+    background: #0b73b9;
+    color: #fff;
+    cursor: pointer;
+}
+
+.rulou_name {
+    height: auto;
+    margin-top: 10px;
+    color: #073f6d;
+    font-weight: 700;
+}
+
+.rulou_error {
+    height: auto;
+    min-height: 18px;
+    color: #a22222;
+}
+
+.rulou > button[onclick*="sterge"],
+.plase > button[onclick*="sterge"],
+.aditional > button[onclick*="sterge"] {
+    margin-top: 12px;
+    padding: 7px 12px;
+    border: 1px solid #d86565;
+    border-radius: 7px;
+    background: #fff !important;
+    color: #a22222;
+    cursor: pointer;
+}
+
+.total-modern,
+.contact-modern {
+    box-sizing: border-box;
+    height: auto;
+    margin: 24px 8px;
+    padding: 22px;
+    border: 1px solid #b9cee2;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #f7fbff 0%, #edf5fc 100%);
+    text-align: left;
+    box-shadow: 0 8px 24px rgba(20, 66, 102, .06);
+}
+
+.total-modern-antet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.totaluri-produse-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.totaluri-produse-grid > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 72px;
+    padding: 12px 14px;
+    border: 1px solid #d7e2eb;
+    border-radius: 9px;
+    background: #fff;
+    color: #476176;
+}
+
+.totaluri-produse-grid > div > span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+}
+
+.totaluri-produse-grid b {
+    margin-top: 6px;
+    color: #073f6d;
+    font-size: 20px;
+}
+
+.totaluri-produse-grid .total-general-card {
+    grid-column: span 5;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #073f6d;
+    color: #cfe6f7;
+}
+
+.totaluri-produse-grid .total-general-card b {
+    margin: 0;
+    color: #fff;
+    font-size: 26px;
+}
+
+.contact-modern-antet {
+    margin-bottom: 18px;
+}
+
+.contact-modern-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.contact-modern-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #244a66;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.contact-modern-grid input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 39px;
+    padding: 8px 10px;
+    border: 1px solid #aebfcd;
+    border-radius: 7px;
+    background: #fff;
+    color: #142f44;
+}
+
+.contact-modern-grid .camp-discount {
+    max-width: 180px;
+}
+
+.buton-oferta-modern {
+    display: block;
+    width: auto;
+    margin: 20px 0 0 auto;
+    font-size: 15px;
+}
+
+@media (max-width: 820px) {
+    .categorie-produse-antet,
+    .totaluri-produse-grid,
+    .contact-modern-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .categorie-produse-text,
+    .totaluri-produse-grid .total-general-card {
+        grid-column: 1 / -1;
+    }
+
+    .total-modern-antet {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* Categoria Copertine */
+.categorie-copertine {
+    clear: both;
+    margin: 26px 8px;
+    padding: 22px;
+    border: 1px solid #b9cee2;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #f7fbff 0%, #edf5fc 100%);
+    box-sizing: border-box;
+}
+
+.categorie-copertine-antet {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 18px;
+    align-items: center;
+}
+
+.categorie-copertine-antet h2 {
+    margin: 3px 0 5px;
+    color: #073f6d;
+    font-size: 24px;
+}
+
+.categorie-copertine-antet p {
+    margin: 0;
+    color: #415b70;
+    line-height: 1.45;
+}
+
+.categorie-eticheta {
+    color: #0b73b9;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.contor-copertine {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #fff;
+    color: #073f6d;
+}
+
+.contor-copertine span {
+    display: inline-grid;
+    place-items: center;
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 50%;
+    background: #0b73b9;
+    color: #fff;
+    font-weight: 800;
+}
+
+.copertina {
+    position: relative;
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid #d1dee9;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 22px rgba(20, 66, 102, .08);
+}
+
+.copertina-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+    align-items: end;
+}
+
+.dimensiuni-copertina,
+.optiuni-structura-copertina {
+    display: flex;
+    grid-column: span 2;
+    gap: 13px;
+}
+
+.dimensiuni-copertina .camp-copertina,
+.optiuni-structura-copertina .camp-copertina {
+    flex: 1;
+}
+
+.camp-copertina {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #244a66;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.camp-copertina select,
+.camp-copertina input {
+    width: 100%;
+    min-height: 38px;
+    padding: 7px 9px;
+    border: 1px solid #aebfcd;
+    border-radius: 7px;
+    background: #fff;
+    color: #142f44;
+    box-sizing: border-box;
+}
+
+.camp-copertina-culoare {
+    grid-column: span 2;
+}
+
+.pret-copertina-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 56px;
+    padding: 9px 12px;
+    border-radius: 9px;
+    background: #eef5fa;
+    color: #36576c;
+}
+
+.pret-copertina-card span {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.pret-copertina-card b {
+    margin-top: 3px;
+    color: #073f6d;
+    font-size: 20px;
+}
+
+.pret-copertina-total {
+    background: #073f6d;
+    color: #cfe6f7;
+}
+
+.pret-copertina-total b {
+    color: #fff;
+}
+
+.buton-calculeaza-copertina {
+    min-height: 44px;
+    background: #0b7d43 !important;
+}
+
+.buton-sterge-copertina {
+    margin-top: 13px;
+    padding: 7px 12px;
+    border: 1px solid #d86565;
+    border-radius: 7px;
+    background: #fff;
+    color: #a22222;
+    cursor: pointer;
+}
+
+.eroare-copertina {
+    min-height: 17px;
+    margin-top: 8px;
+    color: #a22222;
+    font-size: 12px;
+}
+
+.produs-prezentare-copertine .produs-prezentare-imagini img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 820px) {
+    .categorie-copertine-antet,
+    .copertina-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .categorie-copertine-antet > div:first-child,
+    .camp-copertina-culoare {
+        grid-column: 1 / -1;
+    }
+}
+.modul-oferta-text
+{
+    margin: 10px;
+    padding: 22px;
+    border: 1px solid #164b7a;
+    border-radius: 8px;
+    background: #eef6ff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+.modul-oferta-text h2
+{
+    margin-bottom: 8px;
+    color: #123f68;
+    font-size: 22px;
+}
+.modul-oferta-text p
+{
+    margin-bottom: 12px;
+    line-height: 1.45;
+}
+.modul-oferta-text textarea
+{
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 105px;
+    padding: 12px;
+    border: 1px solid #7f9db9;
+    border-radius: 5px;
+    font: 15px Tahoma;
+    line-height: 1.45;
+    resize: vertical;
+}
+.oferta-text-actiuni
+{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+.oferta-text-actiuni label
+{
+    margin-left: auto;
+}
+.oferta-text-buton
+{
+    background: #16733c;
+    color: white;
+    font-weight: bold;
+}
+.oferta-text-exemplu
+{
+    background: #dcecff;
+    color: #123f68;
+}
+.oferta-text-status
+{
+    display: none;
+    margin-top: 14px;
+    padding: 11px 13px;
+    border-radius: 5px;
+    line-height: 1.45;
+}
+.oferta-text-status.succes
+{
+    display: block;
+    border: 1px solid #65a77e;
+    background: #e9f7ee;
+    color: #174f2d;
+}
+.oferta-text-status.eroare
+{
+    display: block;
+    border: 1px solid #c96a6a;
+    background: #fff0f0;
+    color: #8b2020;
+}
+.rulou
+{
+    margin: 10px;
+    border: 1px solid black;
+    height: 120px;
+    padding: 25px;
+    background: #DDDDDD;
+}
+.rulou_content
+{
+    height: 75px;
+}
+.rulou_name
+{
+    height: 20px;
+}
+.rulou_error
+{
+    height: 20px;
+    color: #FF0000;
+}
+.camp_lh
+{
+    width:75px;
+    float: left;
+    padding-top: 10px;
+}
+.camp_lh input
+{
+    width: 45px;
+}
+.camp_tip
+{
+    width: 85px;
+    height: 75px;
+    float: left;
+}
+.camp_tip2
+{
+    width: 55px;
+    height: 75px;
+    float: left;
+}
+.camp_tip3
+{
+    margin-left: 10px;
+    width: 130px;
+    height: 75px;
+    float: left;
+}
+.text_montaj
+{
+    width: 60px;
+    float: left;
+}
+.padding_pret
+{
+    padding-left: 20px;
+}
+.line3
+{
+    height:20px;
+}
+.line2
+{
+    height:25px;
+}
+.nr_rulouri
+{
+    margin: 10px;
+    border: 1px solid black;
+   
+    padding: 25px;
+    background: #99cc33;
+}
+.nr_plase
+{
+    margin: 10px;
+    border: 1px solid black;
+  
+    padding: 25px;
+    background: antiquewhite;
+}
+.total
+{
+    margin: 10px;
+    border: 1px solid black;
+    height: 130px;
+    padding: 15px;
+    background: #eeaa00;
+    text-align: center;
+}
+.cantitate input
+{
+    width: 35px;
+}
+.nr_aditionale
+{
+    margin: 10px;
+    border: 1px solid black;
+
+    padding: 25px;
+    background: #66ccff;
+}
+.aditional
+{
+    margin: 10px;
+    border: 1px solid black;
+    height: 100px;
+    padding: 25px;
+    background: #eeeeee;
+}
+.aditional_content
+{
+    height: 75px;
+}
+.nr_plase
+{
+    margin: 10px;
+    border: 1px solid black;
+
+    padding: 25px;
+    background: antiquewhite;
+}
+.plase
+{
+    margin: 10px;
+    border: 1px solid black;
+    height: 100px;
+    padding: 25px;
+    background: lightgrey;
+}
+.img-start {
+    width: 470px;
+    height: 300px;
+    margin-left: 5px;
+}
+.img_final {
+    width: 310px;
+    margin-left: 5px;
+}
+.plase_content
+{
+    height: 75px;
+}
+.camp_optiune
+{
+    float: left;
+    padding: 10px;
+    width: 75px;
+}
+.camp_produse
+{
+    float: left;
+    padding: 10px;
+    width: 360px;
+}
+.contact
+{
+    margin: 10px;
+    border: 1px solid black;
+    height: 120px;
+    padding: 15px;
+    background: #66ffbb;
+}
+.content-factura
+{
+    margin: 10px;
+    border: 0px solid black;
+    padding: 15px;
+}
+.actiuni-oferta-print
+{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+.buton-print-pdf
+{
+    padding: 11px 20px;
+    border: 0;
+    border-radius: 5px;
+    background: #176b3a;
+    color: white;
+    font: bold 15px Tahoma;
+    cursor: pointer;
+}
+.buton-print-pdf:hover
+{
+    background: #0f502a;
+}
+.buton-print-pdf:disabled
+{
+    background: #7a8a80;
+    cursor: wait;
+}
+.tabel-factura tr,
+.tabel-preturi tr
+{
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+@media print
+{
+    .actiuni-oferta-print,
+    .tabel-comanda
+    {
+        display: none !important;
+    }
+    .wrapper
+    {
+        width: auto;
+        margin: 0;
+    }
+    .content-factura
+    {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Oferta profesională Ferotech - model A4 în 3 pagini */
+#adaug-here
+{
+    background: #e9edf1;
+    padding: 22px 0;
+}
+.oferta-document,
+.oferta-document *
+{
+    box-sizing: border-box;
+}
+.oferta-document
+{
+    width: 210mm;
+    margin: 0 auto;
+    padding: 0;
+    color: #303941;
+    background: transparent;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.42;
+}
+.oferta-pagina
+{
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 18px;
+    padding: 13mm 15mm 17mm;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 30px rgba(24, 42, 57, .14);
+    break-after: auto;
+    page-break-after: auto;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+.oferta-pagina:last-child
+{
+    margin-bottom: 0;
+    break-after: auto;
+    page-break-after: auto;
+}
+.oferta-antet
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 20mm;
+    padding-bottom: 5mm;
+    border-bottom: 1px solid #cfd7dd;
+}
+.oferta-logo
+{
+    display: block;
+    width: 62mm;
+    max-height: 16mm;
+    object-fit: contain;
+    object-position: left center;
+}
+.oferta-antet-titlu
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    color: #142f44;
+    letter-spacing: .12em;
+}
+.oferta-antet-titlu span
+{
+    font-size: 13pt;
+    font-weight: 700;
+}
+.oferta-antet-titlu small
+{
+    margin-top: 2px;
+    color: #75818b;
+    font-size: 6.8pt;
+    font-weight: 600;
+    letter-spacing: .16em;
+}
+.oferta-date-profesional
+{
+    display: grid;
+    grid-template-columns: 1.15fr 1.15fr .7fr;
+    gap: 0;
+    padding: 6mm 0 5mm;
+    border-bottom: 1px solid #cfd7dd;
+}
+.oferta-date-profesional > div
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 24mm;
+    padding: 0 5mm;
+    border-right: 1px solid #cfd7dd;
+}
+.oferta-date-profesional > div:first-child
+{
+    padding-left: 0;
+}
+.oferta-date-profesional > div:last-child
+{
+    padding-right: 0;
+    border-right: 0;
+}
+.oferta-date-profesional b
+{
+    margin-bottom: 2mm;
+    color: #0a7ab8;
+    font-size: 7pt;
+    letter-spacing: .12em;
+}
+.oferta-date-profesional strong
+{
+    margin-bottom: 1mm;
+    color: #263846;
+    font-size: 9pt;
+}
+.oferta-date-profesional span
+{
+    color: #65727c;
+    font-size: 7.5pt;
+    line-height: 1.5;
+}
+.oferta-salut
+{
+    margin: 6mm 0;
+    color: #495761;
+    font-size: 9.5pt;
+}
+.oferta-salut p
+{
+    margin: 0 0 1.5mm;
+}
+.produs-prezentare
+{
+    display: grid;
+    grid-template-columns: 39% 61%;
+    min-height: 118mm;
+    overflow: hidden;
+    background: #eef1f3;
+}
+.produs-prezentare-text
+{
+    padding: 10mm 8mm;
+}
+.eticheta
+{
+    color: #0a7ab8;
+    font-size: 7pt;
+    font-weight: 800;
+    letter-spacing: .16em;
+}
+.produs-prezentare h1
+{
+    margin: 4mm 0;
+    color: #182e3e;
+    font-size: 21pt;
+    line-height: 1.08;
+}
+.produs-prezentare p
+{
+    margin: 0 0 6mm;
+    color: #55636c;
+    font-size: 9pt;
+}
+.produs-prezentare ul
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.produs-prezentare li
+{
+    position: relative;
+    margin: 0 0 2.3mm;
+    padding-left: 5mm;
+    color: #344650;
+    font-size: 8.5pt;
+}
+.produs-prezentare li::before
+{
+    position: absolute;
+    left: 0;
+    color: #0a7ab8;
+    content: '›';
+    font-size: 14pt;
+    line-height: .8;
+}
+.produs-prezentare-imagini
+{
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+}
+.produs-prezentare-imagini img
+{
+    width: calc(100% + 9mm);
+    max-width: none;
+    height: 118mm;
+    min-width: 0;
+    object-fit: cover;
+    object-position: 57% center;
+    transform: translateX(-9mm);
+}
+.produs-prezentare-plase .produs-prezentare-imagini img
+{
+    width: 100%;
+    max-width: 100%;
+    object-position: center;
+    transform: none;
+}
+.produs-prezentare-interioare .produs-prezentare-imagini img
+{
+    width: 100%;
+    max-width: 100%;
+    height: 118mm;
+    object-fit: cover;
+    object-position: center;
+    transform: none;
+}
+.produs-prezentare-skylight .produs-prezentare-imagini img
+{
+    object-position: center;
+}
+.rezumat-prima-pagina
+{
+    display: grid;
+    grid-template-columns: .8fr .9fr 1.4fr;
+    margin-top: 7mm;
+    border-top: 1px solid #cbd4da;
+    border-bottom: 3px solid #0a7ab8;
+}
+.rezumat-prima-pagina > div
+{
+    display: flex;
+    flex-direction: column;
+    padding: 4mm 5mm;
+    border-right: 1px solid #d8dee2;
+}
+.rezumat-prima-pagina > div:last-child
+{
+    border-right: 0;
+    text-align: right;
+}
+.rezumat-prima-pagina span
+{
+    color: #79858e;
+    font-size: 6.5pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+}
+.rezumat-prima-pagina strong
+{
+    color: #183447;
+    font-size: 13pt;
+}
+.oferta-subsol
+{
+    position: absolute;
+    right: 15mm;
+    bottom: 7mm;
+    left: 15mm;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 3mm;
+    border-top: 1px solid #d7dde1;
+    color: #7b8790;
+    font-size: 6.8pt;
+    letter-spacing: .08em;
+}
+.sectiune-titlu
+{
+    display: flex;
+    align-items: center;
+    gap: 5mm;
+    margin: 6mm 0;
+}
+.sectiune-titlu > span
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 13mm;
+    height: 13mm;
+    color: #fff;
+    background: #0a7ab8;
+    font-size: 12pt;
+    font-weight: 700;
+}
+.sectiune-titlu h2
+{
+    margin: 0;
+    color: #1e3444;
+    font-size: 17pt;
+    line-height: 1.15;
+}
+.sectiune-titlu p
+{
+    margin: 1mm 0 0;
+    color: #75818a;
+    font-size: 8.5pt;
+}
+.oferta-document .tabel-profesional
+{
+    width: 100%;
+    margin: 0 0 6mm;
+    border: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #fff;
+    font-size: 7.8pt;
+}
+.oferta-document .tabel-profesional th,
+.oferta-document .tabel-profesional td
+{
+    border: 0;
+    border-bottom: 1px solid #d6dde2;
+    padding: 2.7mm 2.3mm;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+}
+.oferta-document .tabel-profesional thead th
+{
+    border-bottom: 2px solid #0a7ab8;
+    color: #fff;
+    background: #183d57;
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+.oferta-document .tabel-profesional tbody tr:nth-child(even) td
+{
+    background: #f4f6f7;
+}
+.oferta-document .tabel-profesional th:nth-child(1),
+.oferta-document .tabel-profesional td:nth-child(1)
+{
+    width: 6%;
+}
+.oferta-document .tabel-profesional th:nth-child(2),
+.oferta-document .tabel-profesional td:nth-child(2)
+{
+    width: 51%;
+    text-align: left;
+}
+.oferta-document .tabel-profesional th:nth-child(3),
+.oferta-document .tabel-profesional td:nth-child(3)
+{
+    width: 14%;
+}
+.oferta-document .tabel-profesional th:nth-child(4),
+.oferta-document .tabel-profesional td:nth-child(4)
+{
+    width: 10%;
+}
+.oferta-document .tabel-profesional th:nth-child(5),
+.oferta-document .tabel-profesional td:nth-child(5)
+{
+    width: 19%;
+    text-align: right;
+}
+.produs-titlu
+{
+    margin-bottom: 1mm;
+    color: #173b54;
+    font-size: 8pt;
+    font-weight: 700;
+    line-height: 1.25;
+}
+.produs-detalii
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5mm 3mm;
+    color: #66737c;
+    font-size: 6.8pt;
+    line-height: 1.35;
+}
+.zona-totaluri
+{
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 8mm;
+    align-items: start;
+    margin-bottom: 6mm;
+}
+.nota-financiara
+{
+    padding: 5mm;
+    background: #eef2f4;
+}
+.nota-financiara h3,
+.conditii-profesionale h3
+{
+    margin: 0 0 2.5mm;
+    color: #1c3b50;
+    font-size: 10pt;
+}
+.nota-financiara p
+{
+    margin: 0 0 2mm;
+    color: #5e6b74;
+    font-size: 7pt;
+}
+.card-total
+{
+    border-top: 2px solid #183d57;
+}
+.card-total > div
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 5mm;
+    padding: 2.6mm 1mm;
+    border-bottom: 1px solid #ccd5db;
+    color: #50606b;
+    font-size: 8pt;
+}
+.card-total b
+{
+    color: #233b4c;
+    white-space: nowrap;
+}
+.card-total .total-final
+{
+    align-items: center;
+    margin-top: 1mm;
+    padding: 3.5mm 3mm;
+    border-bottom: 0;
+    color: #fff;
+    background: #0a7ab8;
+    font-size: 9pt;
+}
+.card-total .total-final b
+{
+    color: #fff;
+    font-size: 13pt;
+}
+.card-total .total-final small
+{
+    font-size: 8pt;
+}
+.conditii-profesionale
+{
+    padding-top: 5mm;
+    border-top: 1px solid #cbd4da;
+}
+.conditii-grid
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm 8mm;
+}
+.conditii-grid p
+{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.conditii-grid b
+{
+    color: #0a7ab8;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+}
+.conditii-grid span
+{
+    margin-top: .7mm;
+    color: #596872;
+    font-size: 7.2pt;
+}
+.nota-masuratori
+{
+    margin: 5mm 0 0;
+    padding: 3mm 4mm;
+    color: #66737c;
+    background: #f2f4f5;
+    font-size: 6.7pt;
+}
+.galerie-referinte
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 58mm 50mm;
+    gap: 3mm;
+}
+.galerie-card
+{
+    position: relative;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #dfe4e7;
+}
+.galerie-card-mare
+{
+    grid-column: auto;
+}
+.galerie-card img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.galerie-card figcaption
+{
+    display: none;
+}
+.incheiere-oferta
+{
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 10mm;
+    margin-top: 7mm;
+    padding: 7mm;
+    color: #fff;
+    background: #173b54;
+}
+.incheiere-oferta h2
+{
+    margin: 2mm 0;
+    font-size: 15pt;
+    line-height: 1.2;
+}
+.incheiere-oferta p
+{
+    margin: 0;
+    color: #dce5eb;
+    font-size: 8pt;
+}
+.contact-final
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 7mm;
+    border-left: 1px solid rgba(255, 255, 255, .28);
+    font-size: 7.3pt;
+}
+.contact-final b
+{
+    margin-bottom: 2mm;
+    color: #50b8ee;
+}
+.acceptare-oferta
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20mm;
+    margin-top: 9mm;
+}
+.acceptare-oferta > div
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 16mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid #7b878f;
+}
+.acceptare-oferta b
+{
+    color: #263f50;
+    font-size: 8pt;
+}
+.acceptare-oferta span
+{
+    margin-top: auto;
+    color: #8a949b;
+    font-size: 6.8pt;
+}
+.generare-pdf
+{
+    padding: 0 !important;
+    background: #fff !important;
+}
+.generare-pdf .oferta-document
+{
+    margin: 0;
+}
+.generare-pdf .oferta-pagina
+{
+    height: 296mm;
+    min-height: 296mm;
+    margin: 0;
+    box-shadow: none;
+}
+.generare-pdf .oferta-galerie,
+.generare-pdf .oferta-galerie-titlu,
+.generare-pdf .oferta-multumire
+{
+    display: initial !important;
+}
+@media print
+{
+    #adaug-here
+    {
+        padding: 0 !important;
+        background: #fff !important;
+    }
+    .oferta-pagina
+    {
+        margin: 0;
+        box-shadow: none;
+    }
+}
+.tabel-factura
+{
+    background-color: lightgrey;
+    border-collapse: collapse;
+    border: 1px solid;
+    margin-top:10px;
+    width: 100%;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact;
+}
+.firma
+{
+	width: 300px;
+}
+.discount
+{
+	width: 25px;
+}
+.contact_left
+{
+	float: left;
+	width: 150px;
+}
+.contact_right
+{
+	float: left;
+}
+.col2
+{
+	width:40%;
+}
+
+.tabel-contact th {
+    border: 0;
+    padding: 0;
+}
+.tabel-contact td {
+    border: 0;
+    padding: 0;
+}
+
+th, td
+{
+    border-collapse: collapse;
+    border: 1px solid;
+	padding:5px;
+    font-weight: bold;
+}
+.tabel-preturi
+{
+    background: lightgrey;
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 70%;
+	margin-top: 25px;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact;
+}
+.tabel-comanda
+{
+    border-collapse: collapse;
+    border: 1px solid;
+    width: 15%;
+	margin-top: 25px;
+}
+.tabel-legenda
+{
+    border-collapse: collapse;
+    border: 1px solid;
+    width: 50%;
+	margin-top: 25px;
+}
+.tabel-legenda td
+{
+	padding-left:5px;
+}
+
+.buton-oferta {
+	background: blue;
+	padding:10px;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+}
+
+.un-buton {padding:5px;border-radius: 5px;}
+
+#select_ad_1 {width:150px;}
+
+@layer oferta-veche {
+/* Oferta comerciala - layout A4 2026 */
+.actiuni-oferta-print
+{
+    gap: 10px;
+}
+.buton-revenire-oferta
+{
+    padding: 11px 18px;
+    border: 1px solid #b8c7d6;
+    border-radius: 5px;
+    background: #fff;
+    color: #123f68;
+    font: bold 14px Tahoma;
+    cursor: pointer;
+}
+.oferta-document,
+.oferta-document *
+{
+    box-sizing: border-box;
+}
+.oferta-document
+{
+    width: 100%;
+    padding: 4px 8px 10px;
+    background: #fff;
+    color: #213142;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.32;
+}
+.oferta-document > img:first-child
+{
+    display: block;
+    width: 285px !important;
+    height: auto;
+    margin: 0 auto 6px !important;
+}
+.oferta-titlu
+{
+    margin: 0 0 12px;
+    padding: 8px 12px;
+    border-top: 4px solid #0a8dcc;
+    border-bottom: 1px solid #d9e3ec;
+    background: #f4f8fb;
+    color: #103d68;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+.oferta-date
+{
+    display: flex !important;
+    gap: 12px;
+    justify-content: space-between !important;
+    align-items: stretch;
+    margin-bottom: 10px;
+    font-size: 13px !important;
+}
+.oferta-furnizor,
+.oferta-client
+{
+    width: 49%;
+    min-height: 88px;
+    padding: 10px 12px;
+    border: 1px solid #d6e0e9;
+    border-radius: 7px;
+    background: #f9fbfd;
+}
+.oferta-client .tabel-contact
+{
+    width: 100%;
+    font-size: 12.5px;
+}
+.oferta-client .tabel-contact th,
+.oferta-client .tabel-contact td
+{
+    padding: 2px 3px;
+    border: 0;
+    text-align: left;
+    font-weight: 500;
+}
+.oferta-document hr
+{
+    height: 1px;
+    margin: 8px 0 !important;
+    border: 0;
+    background: #ccd8e3;
+}
+.oferta-document .img-start
+{
+    display: none !important;
+}
+.oferta-intro
+{
+    margin: 7px 0 9px !important;
+    padding: 7px 10px;
+    border-left: 4px solid #0a8dcc;
+    background: #f5f9fc;
+    font-size: 13px !important;
+    font-weight: 500;
+}
+.oferta-document .tabel-factura
+{
+    width: 100%;
+    margin: 9px 0 11px;
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    background: #fff;
+    font-size: 12px;
+}
+.oferta-document .tabel-factura tr:first-child th
+{
+    padding: 8px 5px;
+    border: 0;
+    border-right: 1px solid #315b81;
+    background: #123f68;
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-align: center;
+}
+.oferta-document .tabel-factura tr:first-child th:first-child
+{
+    border-radius: 6px 0 0 0;
+}
+.oferta-document .tabel-factura tr:first-child th:last-child
+{
+    border-right: 0;
+    border-radius: 0 6px 0 0;
+}
+.oferta-document .tabel-factura tr:not(:first-child) th
+{
+    padding: 6px 5px;
+    border: 0;
+    border-right: 1px solid #d6e0e9;
+    border-bottom: 1px solid #d6e0e9;
+    background: #fff;
+    color: #27384a;
+    font-weight: 500;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+.oferta-document .tabel-factura tr:not(:first-child):nth-child(odd) th
+{
+    background: #f7fafc;
+}
+.oferta-document .tabel-factura th:nth-child(1)
+{
+    width: 7%;
+}
+.oferta-document .tabel-factura th:nth-child(2)
+{
+    width: 49%;
+    text-align: left;
+}
+.oferta-document .tabel-factura th:nth-child(3)
+{
+    width: 14%;
+}
+.oferta-document .tabel-factura th:nth-child(4)
+{
+    width: 11%;
+}
+.oferta-document .tabel-factura th:nth-child(5)
+{
+    width: 19%;
+}
+.produs-titlu
+{
+    margin-bottom: 3px;
+    color: #123f68;
+    font-size: 12.5px;
+    font-weight: 700;
+}
+.produs-detalii
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 10px;
+    color: #4a5e72;
+    font-size: 11px;
+    line-height: 1.28;
+}
+.produs-detalii span
+{
+    white-space: normal;
+}
+.oferta-document .tabel-preturi
+{
+    width: 55%;
+    margin: 11px 0 9px auto;
+    border: 1px solid #cbd8e4;
+    border-radius: 6px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    background: #fff;
+    font-size: 12.5px;
+}
+.oferta-document .tabel-preturi th,
+.oferta-document .tabel-preturi td
+{
+    padding: 7px 9px;
+    border: 0;
+    border-bottom: 1px solid #dbe4ec;
+    background: #fff;
+}
+.oferta-document .tabel-preturi td
+{
+    text-align: right;
+}
+.oferta-document .tabel-preturi tr:last-child th,
+.oferta-document .tabel-preturi tr:last-child td
+{
+    border-bottom: 0;
+    background: #123f68;
+    color: #fff;
+    font-size: 13.5px;
+}
+.oferta-curs
+{
+    margin: 7px 0 9px;
+    padding: 7px 9px;
+    border-radius: 5px;
+    background: #edf5fb;
+    color: #294c6d;
+    text-align: center;
+    font-size: 11.5px !important;
+}
+.oferta-conditii
+{
+    margin: 9px 0 10px !important;
+    padding: 9px 11px;
+    border: 1px solid #d6e0e9;
+    border-radius: 6px;
+    background: #fbfcfd;
+    font-size: 12px !important;
+    font-weight: 400;
+}
+.oferta-galerie-titlu
+{
+    margin: 5px 0 4px !important;
+    color: #123f68;
+    text-align: center;
+    font-size: 13px !important;
+    font-weight: 700;
+}
+.oferta-galerie
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+.oferta-document .oferta-galerie .img_final
+{
+    width: 100%;
+    height: 58px;
+    margin: 0;
+    border-radius: 4px;
+    object-fit: cover;
+}
+.oferta-multumire
+{
+    margin: 4px 0 0 !important;
+    color: #4c5f72;
+    text-align: center;
+    font-size: 10px !important;
+}
+.oferta-document .tabel-comanda
+{
+    display: none !important;
+}
+.generare-pdf .oferta-galerie,
+.generare-pdf .oferta-galerie-titlu,
+.generare-pdf .oferta-multumire
+{
+    display: none !important;
+}
+@media print
+{
+    .buton-revenire-oferta
+    {
+        display: none !important;
+    }
+    .oferta-document
+    {
+        padding: 0;
+    }
+}
+}
+
+/* Prioritate pentru interfața calculatorului față de stilurile vechi */
+.comanda .nr_rulouri.categorie-produse-antet,
+.comanda .nr_plase.categorie-produse-antet,
+.comanda .nr_aditionale.categorie-produse-antet {
+    display: grid;
+    height: auto;
+    margin: 20px 8px 10px;
+    padding: 22px;
+    border: 1px solid #b9cee2;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #f7fbff 0%, #edf5fc 100%);
+}
+
+.comanda .rulou,
+.comanda .plase,
+.comanda .aditional {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 0;
+    margin: 10px 0 18px;
+    padding: 18px;
+    border: 1px solid #d1dee9;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.comanda .rulou_content,
+.comanda .plase_content,
+.comanda .aditional_content {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 0;
+}
+
+.comanda .rulou_name,
+.comanda .rulou_error {
+    height: auto;
+}
+
+.comanda .total.total-modern,
+.comanda .contact.contact-modern {
+    box-sizing: border-box;
+    height: auto;
+    margin: 24px 8px;
+    padding: 22px;
+    border: 1px solid #b9cee2;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #f7fbff 0%, #edf5fc 100%);
+    text-align: left;
+}
+
+.comanda .categorie-copertine {
+    box-shadow: 0 8px 24px rgba(20, 66, 102, .06);
+}
+
+.comanda .categorie-copertine-antet > .un-buton,
+.comanda .buton-oferta-modern {
+    min-height: 42px;
+    padding: 9px 16px;
+    border: 1px solid #096ba9;
+    border-radius: 8px;
+    background: #0b73b9 !important;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#umbrire_interioara {
+    margin: 0 8px;
+}
+
+.roleta-plisse {
+    box-sizing: border-box;
+    margin: 10px 0 18px;
+    padding: 18px;
+    border: 1px solid #d1dee9;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 22px rgba(20, 66, 102, .08);
+}
+
+.roleta-plisse-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 13px;
+    align-items: end;
+}
+
+.camp-interior {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #244a66;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.camp-interior-material {
+    grid-column: span 2;
+}
+
+.camp-interior select,
+.camp-interior input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 38px;
+    padding: 7px 9px;
+    border: 1px solid #aebfcd;
+    border-radius: 7px;
+    background: #fff;
+    color: #142f44;
+}
+
+.detalii-material-interior {
+    display: flex;
+    grid-column: span 2;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    min-height: 72px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    background: #f4f8fb;
+    color: #476176;
+    font-size: 12px;
+}
+
+.detalii-material-interior b {
+    color: #073f6d;
+}
+
+.buton-calculeaza-interior {
+    min-height: 44px;
+    border: 1px solid #0b7d43 !important;
+    border-radius: 8px;
+    background: #0b7d43 !important;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.nota-culori-interior {
+    margin: 14px 0 0;
+    padding: 9px 12px;
+    border-left: 3px solid #0b73b9;
+    background: #f4f8fb;
+    color: #476176;
+    font-size: 12px;
+}
+
+@media (max-width: 820px) {
+    .roleta-plisse-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .camp-interior-material,
+    .detalii-material-interior {
+        grid-column: 1 / -1;
+    }
+}

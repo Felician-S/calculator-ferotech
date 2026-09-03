@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8"/>
+    <title>Ferotech Oferta</title>
+    <link rel="stylesheet" href="layout.css?v=26">
+    <link rel="stylesheet" href="layout-start.css">
+    <link rel="stylesheet" href="layout-index1.css">
+
+    <script type="text/javascript">
+        var numarRulouri = 0;
+        var indexRulouri = 0;
+        var rulouriIndex = [];
+
+        var numarAditionale = 0;
+        var indexAditionale = 0;
+        var aditionaleIndex = [];
+
+        var numarPlase = 0;
+        var indexPlase = 0;
+        var plaseIndex = [];
+
+        var numarCopertine = 0;
+        var indexCopertine = 0;
+        var copertineIndex = [];
+
+        var numarUmbrireInterioara = 0;
+        var indexUmbrireInterioara = 0;
+        var umbrireInterioaraIndex = [];
+
+        var v_arie;
+        var pret3;
+    </script>
+</head>
+<body>
+
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.9.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.14.0/dist/html2pdf.bundle.min.js"></script>
+
+<script type="text/javascript" src="script-preturi.js?v=4"></script>
+<script type="text/javascript" src="script-preturi2.js?v=2"></script>
+<script type="text/javascript" src="script-preturi-copertine.js?v=3"></script>
+<script type="text/javascript" src="script-preturi-interioare.js?v=4"></script>
+<script type="text/javascript" src="script-main.js?v=8"></script>
+<script type="text/javascript" src="script-oferta-text.js?v=7"></script>
+<script type="text/javascript" src="script-factura.js?v=31"></script>
+
+
+<div class="wrapper">
+    <div class="comanda" id="comanda">
+
+        <section class="modul-oferta-text" aria-labelledby="titlu_oferta_text">
+            <h2 id="titlu_oferta_text">Generează oferta dintr-o descriere</h2>
+            <p>Scrie produsele, opțiunile și dimensiunile în milimetri. Modulul completează calculatorul, iar tu poți verifica sau modifica rezultatul.</p>
+            <textarea id="cerere_oferta_text" rows="5" placeholder="Scrie aici cererea pentru ofertă">Fă-mi o ofertă pentru 3 rulouri tencuibile, stejar auriu, acționare electrică cu motor Smart Home cu telecomandă și montaj, cu dimensiunile 1400x1700, 900x1700, 900x1700.</textarea>
+            <div class="oferta-text-actiuni">
+                <button type="button" class="un-buton oferta-text-buton" onclick="genereazaOfertaDinText(true)">Generează oferta</button>
+                <button type="button" class="un-buton oferta-text-exemplu" onclick="genereazaOfertaDinText(false)">Doar completează calculatorul</button>
+                <label><input type="checkbox" id="inlocuieste_produse_text" checked> Înlocuiește produsele existente</label>
+            </div>
+            <div id="oferta_text_status" class="oferta-text-status" aria-live="polite"></div>
+        </section>
+
+        <div class="nr_rulouri categorie-produse-antet">
+            <div class="categorie-produse-text">
+                <span class="categorie-eticheta">Sisteme de umbrire</span>
+                <h2>Rulouri exterioare</h2>
+                <p>Configurează tipul, culoarea, dimensiunile și opțiunile fiecărui rulou.</p>
+            </div>
+            <div class="contor-produse"><b>Rulouri:</b><span id="nr_rulouri">0</span></div>
+            <button type="button" class="un-buton" onclick="adaugaRulou()">Adaugă rulou</button>
+        </div>
+
+        <!--start_1-->
+        <div id="rulouri">
+        </div>
+        <div class="rulou" id="templaterulou" style="display:none">
+
+            <div class="rulou_content">
+
+                <div class="camp_lh">
+
+                    <div class="line2">
+                        L=
+                        <input type="text" id="l"/>
+                    </div>
+
+                    <div class="line2">
+                        L1=<span id="ap_l">0</span>
+                    </div>
+
+                </div>
+
+                <div class="camp_lh">
+
+                    <div class="line2">
+                        h=
+                        <input type="text" id="h"/>
+                    </div>
+
+                    <div class="line2">
+                        h1=<span id="ap_h">0</span>
+                    </div>
+
+                </div>
+
+                <div class="camp_tip">
+
+                    <div class="line3">
+                        Tip
+                    </div>
+
+                    <div class="line3">
+                        <input type="radio" name="tip" value="suprapus" id="opt1"/>
+                        <label for="opt1">Suprapus</label>
+                    </div>
+
+                    <div class="line3">
+                        <input type="radio" name="tip" value="aplicat" id="opt2"/>
+                        <label for="opt2">Aplicat</label>
+                    </div>
+
+                    <div class="line3">
+                        <input type="radio" name="tip" value="tencuibil" id="opt8"/>
+                        <label for="opt8">Tencuibil</label>
+                    </div>
+
+                </div>
+
+                <div class="camp_tip">
+
+                    <div class="line3">
+                        Culoare
+                    </div>
+
+                    <div class="line3 selector-culoare-detaliata">
+                        <select id="culoare_rulou">
+                            <option value="alb">Alb</option>
+                            <option value="maro">Maro</option>
+                            <option value="antracit">Antracit</option>
+                            <option value="silver">Silver</option>
+                            <option value="stejar_auriu">Stejar Auriu</option>
+                            <option value="nuc">Nuc</option>
+                            <option value="mahon">Mahon</option>
+                            <option value="wenghe">Wenghe</option>
+                        </select>
+                    </div>
+
+                    <div class="categorie-culoare-pret" hidden>
+                        <input type="radio" name="culoare" value="standard" id="opt3" checked/>
+                        <label for="opt3">Standard</label>
+                        <input type="radio" name="culoare" value="imitatie" id="opt4"/>
+                        <label for="opt4">Imitatie</label>
+                        <input type="radio" name="culoare" value="antracit" id="opt9"/>
+                        <label for="opt9">Antracit</label>
+                    </div>
+
+                </div>
+
+                <div class="camp_tip2">
+
+                    <div class="line3">
+                        PIR
+                    </div>
+
+                    <div class="line3">
+                        <input type="radio" name="pir" value="da" id="opt5"/>
+                        <label for="opt5">Da</label>
+                    </div>
+
+                    <div class="line3">
+                        <input type="radio" name="pir" value="nu" id="opt6"/>
+                        <label for="opt6">Nu</label>
+                    </div>
+
+                </div>
+
+                <div class="camp_tip2">
+
+                    <div class="line2">
+                        Caseta
+                    </div>
+
+                    <div class="line2">
+                        <input type="checkbox" name="caseta" id="opt7"/>
+                        <label for="opt7">210</label>
+                    </div>
+
+                </div>
+
+                <div class="camp_tip2">
+
+                    <div class="line2">
+                        Cantitate
+                    </div>
+
+                    <div class="line2 cantitate">
+                        <input type="text" id="c" value="1"/>
+                    </div>
+
+                </div>
+
+                <div class="camp_tip2">
+
+                    <div class="line2">
+                        &nbsp;
+                    </div>
+
+                    <div class="line2">
+                        <button type="button" class="un-buton" onclick="pretRulou($(this))" style="background:green">Pret</button>
+                    </div>
+
+                </div>
+
+
+                <div class="camp_tip padding_pret">
+
+                    <div class="line2">
+                        Preţ bucată
+                    </div>
+
+                    <div class="line2">
+                        <div id="pret_rulou">0</div>
+                    </div>
+
+                </div>
+                <div class="camp_tip">
+
+                    <div class="line2">
+                        Preţ total
+                    </div>
+
+                    <div class="line2">
+                        <div id="pret_total">0</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="rulou_name">
+                <div id="tip_rulou">-
+                </div>
+
+            </div>
+
+            <div class="rulou_error">
+                <div id="error">
+                    Acest tip de rulou nu exista !
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--end_1-->
+
+
+        <div class="nr_plase categorie-produse-antet">
+            <div class="categorie-produse-text">
+                <span class="categorie-eticheta">Protecție și confort</span>
+                <h2>Plase de insecte</h2>
+                <p>Alege modelul, dimensiunile și finisajul potrivit pentru uși sau ferestre.</p>
+            </div>
+            <div class="contor-produse"><b>Plase:</b><span id="nr_plase">0</span></div>
+            <button type="button" class="un-buton" onclick="adaugaPlasa()">Adaugă plasă</button>
+        </div>
+
+        <!--start_plase-->
+        <div id="plase">
+        </div>
+        <div class="plase" id="templateplase" style="display:none">
+
+            <div class="plase_content">
+
+                <div class="camp_plase">
+
+                    <div class="line2">
+
+                        <select id="select_plase">
+                            <option value="tip0">Selecteaza</option>
+                            <option value="tip1">Rulou Geam cu frana</option>
+                            <option value="tip2">Rulou Usa </option>
+                            <option value="tip3">Plise</option>
+                            <option value="tip4">Plise Dublu </option>
+                            <option value="tip5">Batanta cu revenire</option>
+                            <option value="tip6">Glisanta</option>
+                            <option value="tip7">Glisanta Dubla</option>
+                            <option value="tip8">Isso</option>
+                        </select>
+
+                    </div>
+                    <div class="line2">
+                        <p id="value_plasa">Tip</p>
+                    </div>
+                </div>
+                <div class="camp_lh">
+
+                    <div class="line2">
+                        L=
+                        <input type="text" id="l_plasa"/>
+                    </div>
+
+                </div>
+
+                <div class="camp_lh">
+
+                    <div class="line2">
+                        h=
+                        <input type="text" id="h_plasa"/>
+                    </div>
+
+                </div>
+                <div class="camp_optiune">
+                    <div class="line2">
+                        Culoare
+                    </div>
+                    <div class="line2 culoare selector-culoare-detaliata">
+                        <select id="culoare_plasa">
+                            <option value="alb">Alb</option>
+                            <option value="maro">Maro</option>
+                            <option value="antracit">Antracit</option>
+                            <option value="stejar_auriu">Stejar Auriu</option>
+                            <option value="nuc">Nuc</option>
+                            <option value="wenghe">Wenghe</option>
+                            <option value="mahon">Mahon</option>
+                        </select>
+                    </div>
+                    <div class="categorie-culoare-pret" hidden>
+                        <input type="radio" name="culoare_plasa" value="Standard" id="opt_culoare_1" checked/>
+                        <label for="opt6">Standard</label>
+                        <input type="radio" name="culoare_plasa" value="Extra" id="opt_culoare_2"/>
+                        <label for="opt6">Extra</label>
+                    </div>
+
+                </div>
+                <div class="camp_optiune">
+                    <div class="line1">
+                        Cantitate
+                    </div>
+                    <div class="line2 cantitate">
+                        <input type="text" id="c_pl" value="1"/>
+                    </div>
+
+                </div>
+
+
+                <div class="camp_optiune">
+
+                    <button type="button" class="un-buton" onclick="pretPlase($(this))">Pret</button>
+
+                </div>
+                <div class="camp_optiune">
+
+                    <div class="line2">
+                        Preţ total
+                    </div>
+
+                    <div class="line2">
+                        <div id="pret_plasa">0</div>
+                    </div>
+
+                </div>
+                <div class="camp_optiune">
+
+                    <div class="line2">
+                        Preţ total
+                    </div>
+
+                    <div class="line2">
+                        <div id="pret_total_plase">0</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--end_plase-->
+
+        <section class="categorie-copertine" aria-labelledby="titlu_copertine">
+            <div class="categorie-copertine-antet">
+                <div>
+                    <span class="categorie-eticheta">Categorie nouă</span>
+                    <h2 id="titlu_copertine">Copertine retractabile</h2>
+                    <p>Modele și prețuri configurate după tabelul Excel. Dimensiunile sunt introduse și afișate în milimetri.</p>
+                </div>
+                <div class="contor-copertine"><b>Copertine:</b><span id="nr_copertine">0</span></div>
+                <button type="button" class="un-buton" onclick="adaugaCopertina()">Adaugă copertină</button>
+            </div>
+            <div id="copertine"></div>
+        </section>
+
+        <div class="copertina" id="templatecopertina" style="display:none">
+            <div class="copertina-grid">
+                <label class="camp-copertina camp-copertina-model">Model
+                    <select id="model_copertina">
+                        <option value="loggia">Loggia</option>
+                        <option value="monobloc">Monobloc</option>
+                        <option value="kset30">K-SET 30</option>
+                        <option value="extensie">Extensie</option>
+                        <option value="teraspro">Teras Pro</option>
+                    </select>
+                </label>
+
+                <div class="dimensiuni-copertina" id="dimensiuni_copertina_discrete">
+                    <label class="camp-copertina">Lățime
+                        <input type="number" min="1" step="1" id="latime_copertina" value="4000">
+                    </label>
+                    <label class="camp-copertina">Proiecție
+                        <select id="proiectie_copertina"></select>
+                    </label>
+                </div>
+
+                <div class="dimensiuni-copertina" id="dimensiuni_copertina_libere" style="display:none">
+                    <label class="camp-copertina">Lățime (mm)
+                        <input type="number" min="1" step="1" id="latime_copertina_libera" value="4000">
+                    </label>
+                    <label class="camp-copertina">Înălțime (mm)
+                        <input type="number" min="1" step="1" id="proiectie_copertina_libera" value="3000">
+                    </label>
+                </div>
+
+                <label class="camp-copertina" id="optiuni_actionare_copertina">Acționare
+                    <select id="actionare_copertina">
+                        <option value="manuala">Manuală</option>
+                        <option value="motor_somfy">Motor Somfy</option>
+                        <option value="motor_manivela">Motor cu manivelă</option>
+                    </select>
+                </label>
+
+                <label class="camp-copertina" id="optiuni_senzor_copertina">Senzor
+                    <select id="senzor_copertina">
+                        <option value="nu">Fără senzor</option>
+                        <option value="vant">Senzor de vânt</option>
+                        <option value="soare_vant">Senzor soare-vânt</option>
+                    </select>
+                </label>
+
+                <label class="camp-copertina" id="optiuni_extensie_copertina" style="display:none">Configurație
+                    <select id="extensie_copertina">
+                        <option value="da">Cu extensie</option>
+                        <option value="nu">Fără extensie</option>
+                    </select>
+                </label>
+
+                <div class="optiuni-structura-copertina" id="optiuni_structura_copertina" style="display:none">
+                    <label class="camp-copertina">Stâlpi + grindă
+                        <select id="structura_copertina">
+                            <option value="nu">Nu</option>
+                            <option value="da">Da</option>
+                        </select>
+                    </label>
+                    <label class="camp-copertina">Înălțime stâlp
+                        <select id="stalp_copertina" disabled>
+                            <option value="1000">1000 mm</option>
+                            <option value="1500">1500 mm</option>
+                            <option value="2000">2000 mm</option>
+                            <option value="2500">2500 mm</option>
+                        </select>
+                    </label>
+                </div>
+
+                <label class="camp-copertina camp-copertina-culoare">Culoare material
+                    <input type="text" id="culoare_copertina" value="La alegere din paletar">
+                </label>
+                <label class="camp-copertina camp-copertina-cantitate">Cantitate
+                    <input type="number" min="1" step="1" id="cantitate_copertina" value="1">
+                </label>
+
+                <div class="pret-copertina-card"><span>Preț unitar copertină</span><b><span id="pret_copertina">0</span> €</b></div>
+                <div class="pret-copertina-card"><span>Total copertină</span><b><span id="pret_total_copertina">0</span> €</b></div>
+                <div class="pret-copertina-card"><span>Montaj / bucată</span><b><span id="pret_montaj_copertina">100</span> € + TVA</b></div>
+                <div class="pret-copertina-card pret-copertina-total"><span>Total cu montaj, fără TVA</span><b><span id="pret_total_cu_montaj_copertina">0</span> €</b></div>
+                <button type="button" class="un-buton buton-calculeaza-copertina" onclick="pretCopertina($(this))">Calculează prețul</button>
+            </div>
+            <div class="eroare-copertina" id="eroare_copertina" aria-live="polite"></div>
+        </div>
+
+
+
+
+
+
+        <div class="nr_umbrire_interioara categorie-produse-antet">
+            <div class="categorie-produse-text">
+                <span class="categorie-eticheta">Confort și design interior</span>
+                <h2>Sisteme de umbrire interioară</h2>
+                <p>Configurează roletele la dimensiune și alege materialul potrivit proiectului.</p>
+            </div>
+            <div class="contor-produse"><b>Produse:</b><span id="nr_umbrire_interioara">0</span></div>
+            <button type="button" class="un-buton" onclick="adaugaUmbrireInterioara()">Adaugă sistem</button>
+        </div>
+
+        <div id="umbrire_interioara"></div>
+        <div class="roleta-plisse" id="templateroletaplisse" style="display:none">
+            <div class="roleta-plisse-grid">
+                <label class="camp-interior">Produs
+                    <select id="produs_roleta_plisse">
+                        <option value="rolete_plisse">Rolete Plisse</option>
+                        <option value="skylight">SkyLight</option>
+                        <option value="rolete_interioare">Rolete Interioare (Free Hanging)</option>
+                        <option value="doublette">Doublette</option>
+                        <option value="doublette_maxi">Doublette Maxi</option>
+                    </select>
+                </label>
+                <label class="camp-interior camp-interior-material">Material
+                    <select id="material_roleta_plisse">
+                        <option value="antilo">ANTILO</option>
+                        <option value="costa">COSTA</option>
+                        <option value="ebro_effect_print">EBRO EFFECT PRINT</option>
+                        <option value="ellard_bo">ELLARD BO</option>
+                        <option value="enea_bo">ENEA BO</option>
+                        <option value="ester">ESTER</option>
+                        <option value="haiti">HAITI</option>
+                        <option value="hampton">HAMPTON</option>
+                        <option value="hampton_bo">HAMPTON BO</option>
+                        <option value="ivy_print">IVY PRINT</option>
+                        <option value="maroc">MAROC</option>
+                        <option value="marsa_bo">MARSA BO</option>
+                        <option value="megara_alu">MEGARA ALU</option>
+                        <option value="moreno">MORENO</option>
+                        <option value="moreno_bo">MORENO BO</option>
+                        <option value="noa">NOA</option>
+                        <option value="ribera">RIBERA</option>
+                        <option value="sapei">SAPEI</option>
+                        <option value="sara">SARA</option>
+                        <option value="sara_crush_pearl">SARA CRUSH PEARL</option>
+                        <option value="teba">TEBA</option>
+                        <option value="tiara_pearl">TIARA PEARL</option>
+                        <option value="verdun_bo">VERDUN BO</option>
+                    </select>
+                </label>
+                <label class="camp-interior">Lățime (mm)
+                    <input type="number" min="1" step="1" id="latime_roleta_plisse" value="800">
+                </label>
+                <label class="camp-interior">Înălțime (mm)
+                    <input type="number" min="1" step="1" id="inaltime_roleta_plisse" value="1000">
+                </label>
+                <label class="camp-interior">Cantitate
+                    <input type="number" min="1" step="1" id="cantitate_roleta_plisse" value="1">
+                </label>
+
+                <div class="detalii-material-interior">
+                    <span>Tip: <b id="tip_material_roleta_plisse">pliseu</b></span>
+                    <span>Compoziție: <b id="compozitie_roleta_plisse">100% poliester</b></span>
+                    <span>Preț material: <b><span id="pret_mp_roleta_plisse">51.24</span> €/m²</b></span>
+                </div>
+                <div class="pret-copertina-card"><span>Suprafață reală</span><b><span id="suprafata_roleta_plisse">0.8</span> m²</b></div>
+                <div class="pret-copertina-card"><span>Suprafață calculată</span><b><span id="suprafata_facturata_roleta_plisse">0.8</span> m²</b></div>
+                <div class="pret-copertina-card"><span>Preț unitar fără TVA</span><b><span id="pret_roleta_plisse">106.98</span> €</b></div>
+                <div class="pret-copertina-card pret-copertina-total"><span>Total fără TVA</span><b><span id="pret_total_roleta_plisse">106.98</span> €</b></div>
+                <button type="button" class="un-buton buton-calculeaza-interior" onclick="pretRoletaPlisse($(this)); total()">Calculează prețul</button>
+            </div>
+            <p class="nota-culori-interior">Calcul: max(suprafața reală, 0,8 m²) × prețul materialului × 2 + <span id="adaos_fix_roleta_plisse">25</span> €. Prețul include sistemul în culorile standard: alb, argintiu sau negru.</p>
+            <div class="eroare-copertina" id="eroare_roleta_plisse" aria-live="polite"></div>
+        </div>
+
+        <div class="nr_aditionale categorie-produse-antet">
+            <div class="categorie-produse-text">
+                <span class="categorie-eticheta">Opțiuni și servicii</span>
+                <h2>Produse adiționale</h2>
+                <p>Adaugă motorizări, telecomenzi, automatizări, montaj și alte accesorii.</p>
+            </div>
+            <div class="contor-produse"><b>Produse:</b><span id="nr_aditionale">0</span></div>
+            <button type="button" class="un-buton" onclick="adaugaAditional()">Adaugă produs</button>
+        </div>
+
+
+        <!--start_ad1-->
+        <div id="aditionale">
+        </div>
+        <div class="aditional" id="templateaditional" style="display:none">
+
+            <div class="aditional_content">
+
+                <div class="camp_produse">
+
+                    <div class="line2">
+
+                        <select id="select_ad">
+                            <option value="tip0">Selecteaza</option>
+                            <option value="tip1">MOTOR SMART HOME CU DETECTIE / INTRERUPATOR- 5 ANI GARANTIE</option>
+                            <option value="tip2">MOTOR SMART HOME CU DETECTIE / TELECOMANDA- 5 ANI GARANTIE</option>
+                            <option value="tip3">MOTOR SOMFY OXIMO IO CU DETECTIE / TELECOMANDA- 5 ANI GARANTIE</option>
+                            <option value="tip4">MOTOR SOMFY RS100 IO CU DETECTIE / TELECOMANDA- 5 ANI GARANTIE</option>
+                            <option value="tip5">MOTOR SMART HOME CU  INTRERUPATOR- 2 ANI GARANTIE</option>
+                            <option value="tip6">MOTOR SMART HOME CU TELECOMANDA- 2 ANI GARANTIE</option>
+                            <option value="tip7">MOTOR SOMFY BOOST RTS CU  TELECOMANDA-2 ANI GARANTIE</option>
+                            <option value="tip8">MOTOR SOMFY ILMO CU DETECTIE / INTRERUPATOR 5 ANI GARANTIE</option>
+                            <option value="tip9">MOTOR SOMFY RS100 IO  CU PANOU SOLAR, DETECTIE / TELECOMANDA- 5 ANI GARANTIE</option>
+                            <option value="tip10">TELECOMANDA SOMFY 1-4 CANALE</option>
+                            <option value="tip11">TELECOMANDA SMART 15 CANALE</option>
+                            <option value="tip12">UNITATE CONTROL SMART HOME BOX</option>
+                            <option value="tip13">UNITATE CONTROL SOMFY TAHOMA</option>
+                            <option value="tip14">CLEME RIGIDE ANTI-EFRACTIE</option>
+                            <option value="tip15">MONTAJ RULOURI ELECTRICE</option>
+                            <option value="tip16">MONTAJ RULOURI MANUALE</option>
+                            <option value="tip17">MONTAJ PLASE INSECTE</option>
+                            <option value="tip18">PROFIL DISTANTARE</option>
+                            <option value="tip19">FRANA SILICONICA PLASE INSECTE</option>
+                            <option value="tip20">INTRERUPATOR SMART HOME</option>
+                            <option value="tip21">INTRERUPATOR SOMFY SMOOVE</option>
+                        </select>
+
+                    </div>
+                    <div class="line2">
+                        <p id="value_ad">Tip</p>
+                    </div>
+                </div>
+
+                <div class="camp_optiune">
+                    <div class="line2">
+                        Cantitate
+                    </div>
+                    <div class="line2 cantitate">
+                        <input type="text" id="c_ad" value="1"/>
+                    </div>
+
+                </div>
+
+                <div class="camp_optiune">
+
+                    <button type="button" class="un-buton" onclick="pretAditional($(this))">Preţ</button>
+
+                </div>
+
+                <div class="camp_optiune padding_pret">
+
+                    <div class="line2">
+                        Preţ bucată
+                    </div>
+
+                    <div class="line2">
+                        <div id="pret_ad">0</div>
+                    </div>
+
+                </div>
+
+                <div class="camp_optiune">
+
+                    <div class="line2">
+                        Preţ total
+                    </div>
+
+                    <div class="line2">
+                        <div id="pret_total_ad">0</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--end_ad1-->
+
+
+        <!--start_total-->
+
+        <section class="total total-modern" aria-labelledby="titlu_total_comanda">
+            <div class="total-modern-antet">
+                <div>
+                    <span class="categorie-eticheta">Rezumat financiar</span>
+                    <h2 id="titlu_total_comanda">Totalul configurației</h2>
+                    <p>Actualizează toate pozițiile înainte de generarea ofertei.</p>
+                </div>
+                <button type="button" class="un-buton" onclick="total()">Recalculează totalul</button>
+            </div>
+            <div class="totaluri-produse-grid">
+                <div><span>Rulouri</span><b><span id="pret_final_r">0</span> €</b></div>
+                <div><span>Produse adiționale</span><b><span id="pret_final_a">0</span> €</b></div>
+                <div><span>Plase de insecte</span><b><span id="pret_final_p">0</span> €</b></div>
+                <div><span>Copertine și montaj</span><b><span id="pret_final_copertine">0</span> €</b></div>
+                <div><span>Umbrire interioară</span><b><span id="pret_final_interioare">0</span> €</b></div>
+                <div class="total-general-card"><span>Total fără TVA</span><b><span id="pret_final">0</span> €</b></div>
+            </div>
+        </section>
+
+        <section class="contact contact-modern" aria-labelledby="titlu_date_client">
+            <div class="contact-modern-antet">
+                <div>
+                    <span class="categorie-eticheta">Date pentru ofertă</span>
+                    <h2 id="titlu_date_client">Client și condiții comerciale</h2>
+                    <p>Completează informațiile care vor apărea în documentul final.</p>
+                </div>
+            </div>
+            <div class="contact-modern-grid">
+                <label>Nume firmă<input class="firma" id="nume_firma"/></label>
+                <label>Persoana de contact<input class="firma" id="persoana_contact"/></label>
+                <label>Telefon<input class="firma" id="telefon"/></label>
+                <label>Email<input class="firma" id="email"/></label>
+                <label class="camp-discount">Discount (%)<input class="discount" id="val_discount" value="0"/></label>
+            </div>
+            <button type="button" class="buton-oferta buton-oferta-modern" onclick="addtable();">Generează oferta</button>
+        </section>
+
+        <!--end_total-->
+
+
+    </div>
+
+
+    <!--            factura-->
+
+    <div class="factura" id="factura" style="display:none">
+        <div class="content-factura">
+
+            <div class="actiuni-oferta-print">
+                <button type="button" class="buton-revenire-oferta" onclick="revenire()">&#8592; Modific&#259; oferta</button>
+                <button type="button" class="buton-print-pdf" onclick="descarcaOfertaPdf(this)">Descarc&#259; PDF</button>
+            </div>
+
+
+            <div id="adaug-here"></div>
+
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
