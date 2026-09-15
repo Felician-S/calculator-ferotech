@@ -322,18 +322,26 @@
         $('#aditionale').empty();
         $('#plase').empty();
         $('#copertine').empty();
+        $('#umbrire_interioara').empty();
+        $('#usi_garaj').empty();
         rulouriIndex = [];
         aditionaleIndex = [];
         plaseIndex = [];
         copertineIndex = [];
+        umbrireInterioaraIndex = [];
+        usiGarajIndex = [];
         numarRulouri = 0;
         numarAditionale = 0;
         numarPlase = 0;
         numarCopertine = 0;
+        numarUmbrireInterioara = 0;
+        numarUsiGaraj = 0;
         $('#nr_rulouri').html('0');
         $('#nr_aditionale').html('0');
         $('#nr_plase').html('0');
         $('#nr_copertine').html('0');
+        $('#nr_umbrire_interioara').html('0');
+        $('#nr_usi_garaj').html('0');
     }
 
     function selecteazaRulou(nr, rezultat, dimensiune) {

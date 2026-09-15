@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>Ferotech Oferta</title>
-    <link rel="stylesheet" href="layout.css?v=26">
+    <link rel="stylesheet" href="layout.css?v=31">
     <link rel="stylesheet" href="layout-start.css">
     <link rel="stylesheet" href="layout-index1.css">
 
@@ -28,6 +28,10 @@
         var indexUmbrireInterioara = 0;
         var umbrireInterioaraIndex = [];
 
+        var numarUsiGaraj = 0;
+        var indexUsiGaraj = 0;
+        var usiGarajIndex = [];
+
         var v_arie;
         var pret3;
     </script>
@@ -42,9 +46,10 @@
 <script type="text/javascript" src="script-preturi2.js?v=2"></script>
 <script type="text/javascript" src="script-preturi-copertine.js?v=3"></script>
 <script type="text/javascript" src="script-preturi-interioare.js?v=4"></script>
-<script type="text/javascript" src="script-main.js?v=8"></script>
-<script type="text/javascript" src="script-oferta-text.js?v=7"></script>
-<script type="text/javascript" src="script-factura.js?v=31"></script>
+<script type="text/javascript" src="script-preturi-usi-garaj.js?v=5"></script>
+<script type="text/javascript" src="script-main.js?v=13"></script>
+<script type="text/javascript" src="script-oferta-text.js?v=8"></script>
+<script type="text/javascript" src="script-factura.js?v=37"></script>
 
 
 <div class="wrapper">
@@ -254,6 +259,70 @@
         </div>
 
         <!--end_1-->
+
+        <div class="nr_usi_garaj categorie-produse-antet">
+            <div class="categorie-produse-text">
+                <span class="categorie-eticheta">Acces auto și siguranță</span>
+                <h2>Uși de garaj din aluminiu</h2>
+                <p>Introdu dimensiunile, alege culoarea, lamela și motorul. Prețul fără TVA se calculează automat din tabele.</p>
+            </div>
+            <div class="contor-produse"><b>Uși:</b><span id="nr_usi_garaj">0</span></div>
+            <button type="button" class="un-buton" onclick="adaugaUsaGaraj()">Adaugă ușă de garaj</button>
+        </div>
+
+        <div id="usi_garaj"></div>
+        <div class="usa-garaj" id="templateusagaraj" style="display:none">
+            <div class="usa-garaj-grid">
+                <label class="camp-usa-garaj">Lățime (mm)
+                    <input type="number" min="1" step="1" id="latime_usa_garaj" value="2500">
+                </label>
+                <label class="camp-usa-garaj">Înălțime (mm)
+                    <input type="number" min="1" step="1" id="inaltime_usa_garaj" value="2200">
+                </label>
+                <fieldset class="camp-usa-garaj camp-lamela-usa-garaj">
+                    <legend>Lamelă</legend>
+                    <label><input type="radio" name="lamela_usa_garaj" value="55" id="lamela_55_usa_garaj" checked> 55 mm</label>
+                    <label><input type="radio" name="lamela_usa_garaj" value="77" id="lamela_77_usa_garaj"> 77 mm</label>
+                </fieldset>
+                <label class="camp-usa-garaj">Culoare
+                    <select id="culoare_usa_garaj">
+                        <option value="alb">Alb</option>
+                        <option value="maro">Maro închis</option>
+                        <option value="antracit">Antracit</option>
+                        <option value="silver">Silver</option>
+                        <option value="stejar_auriu">Stejar Auriu</option>
+                        <option value="nuc">Nuc</option>
+                        <option value="mahon">Mahon</option>
+                        <option value="wenghe">Wenghe</option>
+                    </select>
+                </label>
+                <label class="camp-usa-garaj camp-motor-usa-garaj">Motor
+                    <select id="motor_usa_garaj">
+                        <option value="fara_motor">Fără motor</option>
+                        <option value="smart_home">Smart Home cu telecomandă (+250 €)</option>
+                        <option value="somfy">Somfy cu telecomandă (+350 €)</option>
+                    </select>
+                </label>
+                <label class="camp-usa-garaj camp-montaj-usa-garaj">Montaj ușă garaj
+                    <select id="montaj_usa_garaj">
+                        <option value="fara_montaj">Fără montaj</option>
+                        <option value="montaj">Montaj ușă garaj (+100 €/buc.)</option>
+                    </select>
+                </label>
+                <label class="camp-usa-garaj">Cantitate
+                    <input type="number" min="1" step="1" id="cantitate_usa_garaj" value="1">
+                </label>
+                <div class="pret-copertina-card"><span>Dimensiune utilizată din tabel</span><b><span id="dimensiune_tabel_usa_garaj">-</span></b></div>
+                <div class="pret-copertina-card"><span>Preț tabel × 2</span><b><span id="pret_baza_usa_garaj">0.00</span> €</b></div>
+                <div class="pret-copertina-card"><span>Majorare culoare</span><b><span id="adaos_culoare_usa_garaj">0%</span></b></div>
+                <div class="pret-copertina-card"><span>Motor selectat</span><b><span id="pret_motor_usa_garaj">0.00</span> €</b></div>
+                <div class="pret-copertina-card"><span>Montaj selectat</span><b><span id="pret_montaj_usa_garaj">0.00</span> €</b></div>
+                <div class="pret-copertina-card"><span>Preț unitar fără TVA</span><b><span id="pret_unitar_usa_garaj">0.00</span> €</b></div>
+                <div class="pret-copertina-card pret-copertina-total"><span>Total uși, fără TVA</span><b><span id="pret_total_usa_garaj">0.00</span> €</b></div>
+                <button type="button" class="un-buton buton-calculeaza-usa-garaj" onclick="pretUsaGaraj($(this).closest('.usa-garaj').attr('numar'), true)">Calculează prețul</button>
+            </div>
+            <div class="eroare-copertina" id="eroare_usa_garaj" aria-live="polite"></div>
+        </div>
 
 
         <div class="nr_plase categorie-produse-antet">
@@ -674,6 +743,7 @@
                 <div><span>Plase de insecte</span><b><span id="pret_final_p">0</span> €</b></div>
                 <div><span>Copertine și montaj</span><b><span id="pret_final_copertine">0</span> €</b></div>
                 <div><span>Umbrire interioară</span><b><span id="pret_final_interioare">0</span> €</b></div>
+                <div><span>Uși de garaj</span><b><span id="pret_final_usi_garaj">0.00</span> €</b></div>
                 <div class="total-general-card"><span>Total fără TVA</span><b><span id="pret_final">0</span> €</b></div>
             </div>
         </section>

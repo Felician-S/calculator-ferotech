@@ -208,6 +208,7 @@ async function addtable() {
     var arePlaseOferta = false;
     var areCopertineOferta = false;
     var areUmbrireInterioaraOferta = false;
+    var areUsiGarajOferta = false;
     var areRoletePlisseOferta = false;
     var areSkyLightOferta = false;
     var primulProdusInteriorOferta = null;
@@ -243,6 +244,32 @@ async function addtable() {
 
         randuriOferta.push({nr: itemeFactura, descriere: descriere, pret: pretBucata, cantitate: cantitate, total: pretTotalRulou});
         valPretFinal += pretTotalRulou;
+    }
+
+    for (var u = 0; u < usiGarajIndex.length; u++) {
+        var indexUsaGaraj = usiGarajIndex[u];
+        var pretTotalUsaGaraj = parseFloat(document.getElementById('pret_total_usa_garaj_' + indexUsaGaraj).innerHTML);
+        if (!(pretTotalUsaGaraj > 0)) continue;
+        areUsiGarajOferta = true;
+
+        itemeFactura++;
+        var configUsaGaraj = configuratieUsaGaraj(indexUsaGaraj);
+        var descriereUsaGaraj = '<div class="produs-titlu">Ușă de garaj din aluminiu</div>' +
+            '<div class="produs-detalii"><span><b>Dimensiune:</b> ' + configUsaGaraj.latime + ' × ' + configUsaGaraj.inaltime + ' mm</span>' +
+            '<span><b>Lamelă:</b> ' + configUsaGaraj.lamela + ' mm</span>' +
+            '<span><b>Culoare:</b> ' + escapeHtml(configUsaGaraj.culoare) + '</span>' +
+            '<span><b>Motor:</b> ' + escapeHtml(configUsaGaraj.motor.denumire) +
+            (configUsaGaraj.motor.pret > 0 ? '. Pachetul include 2 telecomenzi și manivelă pentru acționare manuală în caz de avarie sau urgență.' : '') + '</span>' +
+            '<span><b>Montaj:</b> ' + escapeHtml(configUsaGaraj.montaj.denumire) +
+            (configUsaGaraj.montaj.pret > 0 ? '. Montaj profesional realizat de echipa Ferotech, cu fixare, reglaje și probă de funcționare.' : '') + '</span></div>';
+        randuriOferta.push({
+            nr: itemeFactura,
+            descriere: descriereUsaGaraj,
+            pret: configUsaGaraj.pretUnitar,
+            cantitate: configUsaGaraj.cantitate,
+            total: pretTotalUsaGaraj
+        });
+        valPretFinal += pretTotalUsaGaraj;
     }
 
     for (var j = 0; j < aditionaleIndex.length; j++) {
@@ -367,7 +394,9 @@ async function addtable() {
         ? 'Echivalentul în lei este calculat la cursul de vânzare BT EUR/RON din ' + (dataCursEuroBt || dataOferta) + ': <b>' + cursEuroBt.toFixed(4) + ' lei/EUR</b>.'
         : 'Cursul EUR/RON nu a putut fi actualizat automat; echivalentul în lei nu este afișat.';
 
-    var ofertaDoarPlase = arePlaseOferta && !areRulouriOferta && !areCopertineOferta && !areUmbrireInterioaraOferta;
+    var ofertaCuUsiGaraj = areUsiGarajOferta && !areCopertineOferta && !areUmbrireInterioaraOferta;
+    var ofertaUsaGarajUnica = areUsiGarajOferta && randuriOferta.length === 1;
+    var ofertaDoarPlase = arePlaseOferta && !areRulouriOferta && !areCopertineOferta && !areUmbrireInterioaraOferta && !areUsiGarajOferta;
     var ofertaCuCopertine = areCopertineOferta;
     var ofertaCuInterioare = areUmbrireInterioaraOferta && !areCopertineOferta;
     var prezentariInterioare = {
@@ -405,7 +434,7 @@ async function addtable() {
     var prezentareInterior = prezentariInterioare[primulProdusInteriorOferta] || prezentariInterioare.rolete_plisse;
     var subtitluPagina1 = ofertaCuCopertine
         ? 'COPERTINE RETRACTABILE · PROTECȚIE SOLARĂ'
-        : (ofertaCuInterioare ? 'SISTEME DE UMBRIRE INTERIOARĂ · CONFORT ȘI DESIGN' : (ofertaDoarPlase ? 'PLASE DE INSECTE · UȘI ȘI FERESTRE' : 'RULOURI EXTERIOARE · SISTEME DE UMBRIRE'));
+        : (ofertaCuInterioare ? 'SISTEME DE UMBRIRE INTERIOARĂ · CONFORT ȘI DESIGN' : (ofertaCuUsiGaraj ? 'UȘI DE GARAJ DIN ALUMINIU · ACCES ȘI SIGURANȚĂ' : (ofertaDoarPlase ? 'PLASE DE INSECTE · UȘI ȘI FERESTRE' : 'RULOURI EXTERIOARE · SISTEME DE UMBRIRE')));
     var prezentarePagina1;
     if (ofertaCuCopertine) {
         prezentarePagina1 = '<div class="produs-prezentare produs-prezentare-copertine"><div class="produs-prezentare-text"><span class="eticheta">CONFORT PENTRU TERASE</span><h1>Copertine retractabile personalizate</h1><p>Sisteme de umbrire realizate la dimensiune, concepute pentru terase și balcoane care au nevoie de protecție solară, confort termic și un aspect elegant.</p><ul><li>construcție robustă cu brațe articulate</li><li>protecție solară și confort vizual</li><li>acționare manuală sau electrică, în funcție de model</li><li>senzori de vânt sau soare-vânt disponibili</li><li>material textil și finisaje alese din paletar</li></ul></div><div class="produs-prezentare-imagini"><img src="img/copertina-principala-ferotech.png" alt="Copertină retractabilă Ferotech - imagine de referință"></div></div>';
@@ -413,6 +442,8 @@ async function addtable() {
         var beneficiiInteriorHtml = '';
         for (var b = 0; b < prezentareInterior.beneficii.length; b++) beneficiiInteriorHtml += '<li>' + prezentareInterior.beneficii[b] + '</li>';
         prezentarePagina1 = '<div class="produs-prezentare produs-prezentare-interioare produs-prezentare-' + primulProdusInteriorOferta + '"><div class="produs-prezentare-text"><span class="eticheta">LUMINĂ CONTROLATĂ</span><h1>' + prezentareInterior.titlu + '</h1><p>' + prezentareInterior.descriere + '</p><ul>' + beneficiiInteriorHtml + '</ul></div><div class="produs-prezentare-imagini"><img src="' + prezentareInterior.imagine + '" alt="' + prezentareInterior.titlu + ' - imagine de referință"></div></div>';
+    } else if (ofertaCuUsiGaraj) {
+        prezentarePagina1 = '<div class="produs-prezentare produs-prezentare-usi-garaj"><div class="produs-prezentare-text"><span class="eticheta">ACCES CONFORTABIL ȘI SIGUR</span><h1>Uși de garaj din aluminiu</h1><p>Sisteme realizate la dimensiune, cu lamele din aluminiu și finisaje adaptate tâmplăriei și fațadei.</p><ul><li>lamele de 55 sau 77 mm</li><li>execuție personalizată după dimensiunile golului</li><li>culori standard, antracit, silver și imitație lemn</li><li>construcție rezistentă pentru utilizare zilnică</li><li>motorizare Smart Home sau Somfy cu telecomandă</li></ul></div><div class="produs-prezentare-imagini produs-prezentare-imagini-dubla"><img src="img/usa-garaj-principala-ferotech.png" alt="Ușă de garaj Ferotech - imagine principală"><img src="img/usa-garaj-secundara-ferotech.png" alt="Ușă de garaj Ferotech - imagine de referință"></div></div>';
     } else if (ofertaDoarPlase) {
         prezentarePagina1 = '<div class="produs-prezentare produs-prezentare-plase"><div class="produs-prezentare-text"><span class="eticheta">CONFORT FĂRĂ INSECTE</span><h1>Plase de insecte pentru uși și ferestre</h1><p>Soluții discrete și durabile, executate la comandă, care permit aerisirea naturală și păstrează insectele și polenul la exterior.</p><ul><li>protecție eficientă cu ușile și ferestrele deschise</li><li>cadre stabile din aluminiu și plasă de calitate</li><li>modele rulou, plisse, glisante, batante sau fixe</li><li>vizibilitate bună și integrare discretă</li><li>culori adaptate tâmplăriei</li></ul></div><div class="produs-prezentare-imagini"><img src="img/plase-principala-ferotech.png" alt="Plasă de insecte pentru ușă - lucrare de referință"></div></div>';
     } else {
@@ -426,18 +457,24 @@ async function addtable() {
         '<div class="rezumat-prima-pagina"><div><span>POZIȚII ÎN OFERTĂ</span><strong>' + itemeFactura + '</strong></div><div><span>VALABILITATE</span><strong>15 zile</strong></div><div><span>PREȚ FINAL CU TVA</span><strong>' + totalCuTva + ' €</strong></div></div>' +
         subsolPagina(1) + '</section>';
 
-    var pagina2 = '<section class="oferta-pagina oferta-pagina-urmatoare oferta-pagina-calcul">' + antetPagina('CONFIGURAȚIE ȘI PREȚURI') +
+    var serviciiIncluseOferta = areUsiGarajOferta
+        ? 'Prețurile ușilor de garaj includ motorul și montajul selectate; transportul se include numai dacă este evidențiat separat în ofertă.'
+        : 'Oferta este finală și include TVA, măsurători și montaj.';
+
+    var pagina2 = '<section class="oferta-pagina oferta-pagina-urmatoare oferta-pagina-calcul' + (ofertaUsaGarajUnica ? ' oferta-pagina-usa-garaj-unica' : '') + '">' + antetPagina('CONFIGURAȚIE ȘI PREȚURI') +
         '<div class="sectiune-titlu"><span>02</span><div><h2>Calculul ofertei</h2><p>Produsele, dimensiunile și opțiunile selectate</p></div></div>' +
         '<table class="tabel-factura tabel-profesional"><thead><tr><th>Nr.</th><th>Produs / configurație</th><th>Preț unitar</th><th>Cant.</th><th>Total</th></tr></thead><tbody>' + randuriHtml + '</tbody></table>' +
         '<div class="zona-totaluri"><div class="nota-financiara"><h3>Informații financiare</h3><p>Toate prețurile sunt exprimate în <b>EURO</b>.</p><p>' + notaCurs + '</p><p>Prețul în lei are caracter informativ și se actualizează automat în momentul generării ofertei.</p></div>' + rezumatHtml + '</div>' +
-        '<div class="conditii-profesionale"><h3>Condiții comerciale</h3><div class="conditii-grid"><p><b>Termen de livrare</b><span>10 zile lucrătoare pentru culorile standard și 15 zile lucrătoare pentru celelalte culori.</span></p><p><b>Condiții de plată</b><span>Avans minim 50% din valoarea lucrării; termenul curge de la data achitării avansului.</span></p><p><b>Servicii incluse</b><span>Oferta este finală și include TVA, măsurători și montaj.</span></p><p><b>Valabilitate</b><span>15 zile calendaristice de la data emiterii.</span></p></div></div>' +
+        '<div class="conditii-profesionale"><h3>Condiții comerciale</h3><div class="conditii-grid"><p><b>Termen de livrare</b><span>10 zile lucrătoare pentru culorile standard și 15 zile lucrătoare pentru celelalte culori.</span></p><p><b>Condiții de plată</b><span>Avans minim 50% din valoarea lucrării; termenul curge de la data achitării avansului.</span></p><p><b>Servicii incluse</b><span>' + serviciiIncluseOferta + '</span></p><p><b>Valabilitate</b><span>15 zile calendaristice de la data emiterii.</span></p></div></div>' +
         '<p class="nota-masuratori">Prețul final este confirmat după verificarea dimensiunilor la locul montajului. Pentru informații: 0756 266 449.</p>' +
         subsolPagina(2) + '</section>';
 
-    var primaImagineGalerie = '<figure class="galerie-card galerie-card-mare"><img src="img/3.png" alt="Rulouri din aluminiu Ferotech"><figcaption>Rulouri din aluminiu</figcaption></figure>';
+    var primaImagineGalerie = ofertaCuUsiGaraj
+        ? '<figure class="galerie-card galerie-card-mare"><img src="img/usa-garaj-secundara-ferotech.png" alt="Ușă de garaj din aluminiu Ferotech"><figcaption>Ușă de garaj din aluminiu</figcaption></figure>'
+        : '<figure class="galerie-card galerie-card-mare"><img src="img/3.png" alt="Rulouri din aluminiu Ferotech"><figcaption>Rulouri din aluminiu</figcaption></figure>';
     var subtitluGalerie = ofertaCuCopertine
         ? 'Imagine de referință și soluții complementare pentru amenajarea terasei'
-        : (ofertaCuInterioare ? 'Imagini de referință pentru soluții de umbrire și confort interior' : (ofertaDoarPlase ? 'Imagini de referință pentru soluții de protecție și umbrire' : 'Imagini de referință din gama de soluții Ferotech'));
+        : (ofertaCuInterioare ? 'Imagini de referință pentru soluții de umbrire și confort interior' : (ofertaCuUsiGaraj ? 'Imagini de referință pentru sisteme din aluminiu și automatizări' : (ofertaDoarPlase ? 'Imagini de referință pentru soluții de protecție și umbrire' : 'Imagini de referință din gama de soluții Ferotech')));
 
     var pagina3 = '<section class="oferta-pagina oferta-pagina-urmatoare oferta-pagina-referinte">' + antetPagina('PRODUSE ȘI LUCRĂRI DE REFERINȚĂ') +
         '<div class="sectiune-titlu"><span>03</span><div><h2>Inspirație pentru proiectul dumneavoastră</h2><p>' + subtitluGalerie + '</p></div></div>' +

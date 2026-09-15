@@ -59,6 +59,70 @@ function culoareExactaPlasa(nr) {
     return culoare ? culoare.denumire : 'ALB';
 }
 
+function configuratieUsaGaraj(nr) {
+    var culoareCod = $('#culoare_usa_garaj_' + nr).val() || 'alb';
+    var culoareInfo = CULORI_RULOURI_DETALIATE[culoareCod] || CULORI_RULOURI_DETALIATE.alb;
+    var denumireCuloare = culoareCod === 'maro' ? 'MARO ÎNCHIS' : culoareInfo.denumire;
+    var lamela = $('input[name="lamela_usa_garaj_' + nr + '"]:checked').val() || '55';
+    var latime = parseInt($('#latime_usa_garaj_' + nr).val(), 10);
+    var inaltime = parseInt($('#inaltime_usa_garaj_' + nr).val(), 10);
+    var motorCod = $('#motor_usa_garaj_' + nr).val() || 'fara_motor';
+    var motorInfo = MOTOARE_USI_GARAJ[motorCod] || MOTOARE_USI_GARAJ.fara_motor;
+    var montajCod = $('#montaj_usa_garaj_' + nr).val() || 'fara_montaj';
+    var montajInfo = MONTAJ_USI_GARAJ[montajCod] || MONTAJ_USI_GARAJ.fara_montaj;
+    var rezultatTabel = cautaPretTabelUsaGaraj(lamela, latime, inaltime);
+    var multiplicatorCuloare = MULTIPLICATOR_CULOARE_USA_GARAJ[culoareCod] || 1;
+    var pretBaza = rezultatTabel.pret > 0 ? rezultatTabel.pret * 2 : 0;
+    var pretUnitar = pretBaza > 0 ? pretBaza * multiplicatorCuloare + motorInfo.pret + montajInfo.pret + ADAOS_FIX_USA_GARAJ : 0;
+    return {
+        latime: latime,
+        inaltime: inaltime,
+        lamela: lamela,
+        culoareCod: culoareCod,
+        culoare: denumireCuloare,
+        cantitate: parseInt($('#cantitate_usa_garaj_' + nr).val(), 10),
+        motorCod: motorCod,
+        motor: motorInfo,
+        montajCod: montajCod,
+        montaj: montajInfo,
+        multiplicatorCuloare: multiplicatorCuloare,
+        procentCuloare: Math.round((multiplicatorCuloare - 1) * 100),
+        rezultatTabel: rezultatTabel,
+        pretBaza: pretBaza,
+        pretUnitar: pretUnitar
+    };
+}
+
+function pretUsaGaraj(nr, actualizeazaTotalGeneral) {
+    nr = parseInt(nr, 10);
+    var configuratie = configuratieUsaGaraj(nr);
+    var eroare = '';
+
+    if (!(configuratie.latime > 0) || !(configuratie.inaltime > 0)) {
+        eroare = 'Introdu lățimea și înălțimea ușii în milimetri.';
+    } else if (!(configuratie.cantitate > 0)) {
+        eroare = 'Cantitatea trebuie să fie cel puțin 1.';
+    } else if (configuratie.rezultatTabel.eroare) {
+        eroare = configuratie.rezultatTabel.eroare;
+    }
+
+    var pretTotal = eroare ? 0 : configuratie.pretUnitar * configuratie.cantitate;
+    var dimensiuneTabel = configuratie.rezultatTabel.pret > 0
+        ? configuratie.rezultatTabel.latimeTabel + ' × ' + configuratie.rezultatTabel.inaltimeTabel + ' mm'
+        : '-';
+    $('#dimensiune_tabel_usa_garaj_' + nr).html(dimensiuneTabel);
+    $('#pret_baza_usa_garaj_' + nr).html(configuratie.pretBaza.toFixed(2));
+    $('#adaos_culoare_usa_garaj_' + nr).html(configuratie.procentCuloare + '%');
+    $('#pret_motor_usa_garaj_' + nr).html(configuratie.motor.pret.toFixed(2));
+    $('#pret_montaj_usa_garaj_' + nr).html(configuratie.montaj.pret.toFixed(2));
+    $('#pret_unitar_usa_garaj_' + nr).html((eroare ? 0 : configuratie.pretUnitar).toFixed(2));
+    $('#pret_total_usa_garaj_' + nr).html(pretTotal.toFixed(2));
+    $('#eroare_usa_garaj_' + nr).text(eroare);
+
+    if (actualizeazaTotalGeneral) total();
+    return pretTotal;
+}
+
 function aproximare_inaltime(x) {
     var rest;
 
@@ -263,8 +327,17 @@ function total() {
     }
     document.getElementById('pret_final_interioare').innerHTML = v_total_interioare.toFixed(2);
 
+    var v_total_usi_garaj = 0;
+    for (i = 0; i < usiGarajIndex.length; i++) {
+        if (usiGarajIndex[i]) {
+            v_partial = pretUsaGaraj(usiGarajIndex[i], false);
+            if (v_partial > 0) v_total_usi_garaj += parseFloat(v_partial);
+        }
+    }
+    document.getElementById('pret_final_usi_garaj').innerHTML = v_total_usi_garaj.toFixed(2);
+
     var v_total;
-    v_total = v_total_r + v_total_a + v_total_p + v_total_copertine + v_total_interioare;
+    v_total = v_total_r + v_total_a + v_total_p + v_total_copertine + v_total_interioare + v_total_usi_garaj;
     v_total = parseFloat(v_total).toFixed(2);
     document.getElementById('pret_final').innerHTML = v_total;
 
@@ -527,6 +600,43 @@ function stergeUmbrireInterioara(nr) {
     if (pozitie >= 0) umbrireInterioaraIndex.splice(pozitie, 1);
     numarUmbrireInterioara = Math.max(0, numarUmbrireInterioara - 1);
     $('#nr_umbrire_interioara').html(numarUmbrireInterioara);
+    total();
+}
+
+function adaugaUsaGaraj() {
+    var element = $('#templateusagaraj').clone();
+    element.appendTo($('#usi_garaj'));
+    element.attr('style', 'display:block');
+    numarUsiGaraj++;
+    indexUsiGaraj++;
+    usiGarajIndex.push(indexUsiGaraj);
+    $('#nr_usi_garaj').html(numarUsiGaraj);
+
+    var nr = indexUsiGaraj;
+    element.attr('id', 'usa_garaj_' + nr);
+    element.attr('numar', nr);
+    var iduri = [
+        'latime_usa_garaj', 'inaltime_usa_garaj', 'lamela_55_usa_garaj',
+        'lamela_77_usa_garaj', 'culoare_usa_garaj', 'motor_usa_garaj', 'montaj_usa_garaj',
+        'cantitate_usa_garaj', 'dimensiune_tabel_usa_garaj', 'pret_baza_usa_garaj',
+        'adaos_culoare_usa_garaj', 'pret_motor_usa_garaj', 'pret_montaj_usa_garaj', 'pret_unitar_usa_garaj',
+        'pret_total_usa_garaj', 'eroare_usa_garaj'
+    ];
+    for (var i = 0; i < iduri.length; i++) {
+        element.find('#' + iduri[i]).attr('id', iduri[i] + '_' + nr);
+    }
+    element.find('input[name="lamela_usa_garaj"]').attr('name', 'lamela_usa_garaj_' + nr);
+    element.append('<button type="button" class="buton-sterge-copertina" onclick="stergeUsaGaraj(' + nr + ')">Șterge ușa de garaj</button>');
+    element.find('input, select').bind('input change', function () { pretUsaGaraj(nr, true); });
+    pretUsaGaraj(nr, true);
+}
+
+function stergeUsaGaraj(nr) {
+    $('#usa_garaj_' + nr).remove();
+    var pozitie = usiGarajIndex.indexOf(nr);
+    if (pozitie >= 0) usiGarajIndex.splice(pozitie, 1);
+    numarUsiGaraj = Math.max(0, numarUsiGaraj - 1);
+    $('#nr_usi_garaj').html(numarUsiGaraj);
     total();
 }
 
